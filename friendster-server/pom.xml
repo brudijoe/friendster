@@ -11,7 +11,7 @@
 	<groupId>com.brudijoe</groupId>
 	<artifactId>friendster-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>friendster</name>
 	<description>Friendster Application</description>
 	<properties>
