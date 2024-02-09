@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.brudijoe.friendsterserver.model.Basics;
 import com.brudijoe.friendsterserver.model.Friend;
 import com.brudijoe.friendsterserver.repository.FriendsterRepository;
 
@@ -15,13 +16,12 @@ public class FriendsterConfig {
     @Bean
     CommandLineRunner commandLineRunner(FriendsterRepository friendsterRepository) {
         return args -> {
-            Friend friendOne = new Friend(
-                    "Bob",
-                    "Dylon");
+            Basics basicsOne = new Basics("Bob", "Dylon");
+            Basics basicsTwo = new Basics("Tom", "Shetfield");
 
-            Friend friendTwo = new Friend(
-                    "Tom",
-                    "Shetfield");
+            Friend friendOne = new Friend(basicsOne);
+
+            Friend friendTwo = new Friend(basicsTwo);
 
             friendsterRepository.saveAll(List.of(friendOne, friendTwo));
         };
