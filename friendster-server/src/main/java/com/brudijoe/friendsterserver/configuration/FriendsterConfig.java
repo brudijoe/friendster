@@ -16,11 +16,14 @@ public class FriendsterConfig {
     @Bean
     CommandLineRunner commandLineRunner(FriendsterRepository friendsterRepository) {
         return args -> {
+            // Delete existing data
+            friendsterRepository.deleteAll();
+
+            // Insert new data
             Basics basicsOne = new Basics("Bob", "Dylon");
             Basics basicsTwo = new Basics("Tom", "Shetfield");
 
             Friend friendOne = new Friend(basicsOne);
-
             Friend friendTwo = new Friend(basicsTwo);
 
             friendsterRepository.saveAll(List.of(friendOne, friendTwo));

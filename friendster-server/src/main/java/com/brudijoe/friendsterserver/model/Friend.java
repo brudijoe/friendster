@@ -6,12 +6,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "friends")
+@Entity(name = "Friend")
+@Table(name = "friend")
 public class Friend {
 
     @Id
@@ -19,12 +19,13 @@ public class Friend {
     @Column(name = "friend_id")
     private Long friendId;
 
-    @OneToOne(mappedBy = "friend", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    // Unidirectional Mapping
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "basics_id")
     private Basics basics;
 
+    // Default constructor
     public Friend() {
-
     }
 
     /* This constructor is for testing and needs a friendId */
