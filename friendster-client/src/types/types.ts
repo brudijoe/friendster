@@ -17,25 +17,33 @@ export type Basics = {
   firstName: string;
   lastName: string;
   age: number;
-  birthday: string;
-  birthdayPresentIdeas: string[];
-  MBTI: string;
 };
 
 export type Details = {
-  interests: Interests;
-  social: Social;
-};
-
-export type Interests = {
+  politicalOrientation: string;
+  religion: string;
   hobbies: string[];
   likes: string[];
   dislikes: string[];
   goals: string[];
   worries: string[];
-  politicalOrientation: string;
-  religion: string;
   taboos: string[];
+  personality: Personality;
+  birthday: Birthday;
+  social: Social;
+};
+
+export type Personality = {
+  MBTI: string;
+  quirks: string[];
+  strengths: string[];
+  weaknesses: string[];
+};
+
+export type Birthday = {
+  date: string;
+  presentIdeas: string[];
+  pastPresents: string[];
 };
 
 export type Social = {
