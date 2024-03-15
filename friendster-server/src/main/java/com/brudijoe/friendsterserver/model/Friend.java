@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 public class Friend {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "friend_id")
     private Long friendId;
 
@@ -24,19 +24,25 @@ public class Friend {
     @JoinColumn(name = "basics_id")
     private Basics basics;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "details_id")
+    private Details details;
+
     // Default constructor
     public Friend() {
     }
 
     /* This constructor is for testing and needs a friendId */
-    public Friend(Long friendId, Basics basics) {
+    public Friend(Long friendId, Basics basics, Details details) {
         this.friendId = friendId;
         this.basics = basics;
+        this.details = details;
     }
 
     /* This constructor is for the database and doesn't need a friendId */
-    public Friend(Basics basics) {
+    public Friend(Basics basics, Details details) {
         this.basics = basics;
+        this.details = details;
     }
 
     // Getters and setters for Basics
@@ -54,6 +60,14 @@ public class Friend {
 
     public void setFriendId(Long friendId) {
         this.friendId = friendId;
+    }
+
+    public Details getDetails() {
+        return this.details;
+    }
+
+    public void setDetails(Details details) {
+        this.details = details;
     }
 
 }

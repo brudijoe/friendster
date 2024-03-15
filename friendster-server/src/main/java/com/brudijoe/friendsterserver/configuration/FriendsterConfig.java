@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.brudijoe.friendsterserver.model.Basics;
+import com.brudijoe.friendsterserver.model.Details;
 import com.brudijoe.friendsterserver.model.Friend;
 import com.brudijoe.friendsterserver.repository.FriendsterRepository;
 
@@ -23,8 +24,11 @@ public class FriendsterConfig {
             Basics basicsOne = new Basics("Bob", "Dylon");
             Basics basicsTwo = new Basics("Tom", "Shetfield");
 
-            Friend friendOne = new Friend(basicsOne);
-            Friend friendTwo = new Friend(basicsTwo);
+            Details detailsOne = new Details("left", "none");
+            Details detailsTwo = new Details("middle", "none");
+
+            Friend friendOne = new Friend(basicsOne, detailsOne);
+            Friend friendTwo = new Friend(basicsTwo, detailsTwo);
 
             friendsterRepository.saveAll(List.of(friendOne, friendTwo));
         };
