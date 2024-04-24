@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.brudijoe.friendsterserver.model.Friend;
@@ -34,10 +36,18 @@ public class FriendsterController {
     }
 
     @PostMapping("/addFriend")
-    public ResponseEntity<List<Friend>> addNote(@RequestBody Friend friend) {
+    public ResponseEntity<List<Friend>> addFriend(@RequestBody Friend friend) {
         friendsterService.addFriend(friend);
-        List<Friend> updatedNotes = friendsterService.getFriends();
-        updatedNotes.sort(Comparator.comparing(Friend::getFriendId));
-        return ResponseEntity.status(HttpStatus.CREATED).body(updatedNotes);
+        List<Friend> updatedFriends = friendsterService.getFriends();
+        updatedFriends.sort(Comparator.comparing(Friend::getFriendId));
+        return ResponseEntity.status(HttpStatus.CREATED).body(updatedFriends);
+    }
+
+    @DeleteMapping(path = "/deleteFriend")
+    public ResponseEntity<List<Friend>> deleteFriend(@RequestParam("friendId") Long friendId) {
+        friendsterService.deleteFriend(friendId);
+        List<Friend> updatedFriends = friendsterService.getFriends();
+        updatedFriends.sort(Comparator.comparing(Friend::getFriendId));
+        return ResponseEntity.ok().body(updatedFriends);
     }
 }

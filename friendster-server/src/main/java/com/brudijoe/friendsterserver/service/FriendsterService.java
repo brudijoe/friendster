@@ -23,4 +23,12 @@ public class FriendsterService {
     public void addFriend(Friend friend) {
         friendsterRepository.save(friend);
     }
+
+    public void deleteFriend(Long friendId) {
+        boolean exists = friendsterRepository.existsById(friendId);
+        if (!exists) {
+            throw new IllegalStateException("friend with friendId: " + friendId + " does not exists");
+        }
+        friendsterRepository.deleteById(friendId);
+    }
 }
