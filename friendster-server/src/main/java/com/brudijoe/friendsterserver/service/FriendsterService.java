@@ -19,4 +19,8 @@ public class FriendsterService {
     public List<Friend> getFriends() {
         return friendsterRepository.findAll();
     }
+
+    public void addFriend(Friend friend) {
+        friendsterRepository.save(friend);
+    }
 }
