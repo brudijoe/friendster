@@ -1,14 +1,15 @@
 import { useState } from "react";
 import useFriends, { FriendContext } from "./hooks/useFriends.ts";
 import { Header } from "./pages/Header.tsx";
-import { map } from "ramda";
 import { FriendList } from "./pages/Friend/FriendList.tsx";
 import { Friend } from "./types/types.ts";
+import { CreateFriend } from "./pages/CreateFriend.tsx";
 
 function App() {
-  const { friends, loading, error } = useFriends();
+  const { friends, addFriend, deleteFriend, editFriend, loading, error } =
+    useFriends();
 
-  const [newFriends, setNewFriends] = useState<Friend[]>([
+  const [newFriends] = useState<Friend[]>([
     {
       friendId: 1,
       basics: {
@@ -62,7 +63,9 @@ function App() {
   ]);
 
   return (
-    <FriendContext.Provider value={{ friends, loading, error }}>
+    <FriendContext.Provider
+      value={{ friends, addFriend, deleteFriend, editFriend, loading, error }}
+    >
       <div className="flex flex-col h-screen bg-gray-900">
         <Header />
         {loading ? (
@@ -72,22 +75,13 @@ function App() {
         ) : (
           friends && (
             <>
-              {/* {map(
-                (singleFriend) => (
-                  <div key={singleFriend.friendId}>
-                    {singleFriend.friendFirstName}&nbsp;
-                    {singleFriend.friendLastName}
-                  </div>
-                ),
-                friends
-              )} */}
+              {/* Search Example */}
+              <div>Search Friend</div>
+              <CreateFriend />
+              <FriendList friends={friends} />
             </>
           )
         )}
-        {/* Search Example */}
-        <div>Search Friend</div>
-        {/* Friend Example */}
-        <FriendList friends={newFriends} />
       </div>
     </FriendContext.Provider>
   );

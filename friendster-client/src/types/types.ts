@@ -1,5 +1,8 @@
 export type FriendStore = {
   friends: Friend[] | null;
+  addFriend: ({ basics, details }: FriendWithOutId) => Promise<void>;
+  deleteFriend: (friendId: number) => Promise<void>;
+  editFriend: (friendId: number, friend: Friend) => Promise<void>;
   loading: Loading;
   error: ErrorMessage;
 };
@@ -62,3 +65,5 @@ export type Family = {
   birthday: string;
   age: number;
 };
+
+export type FriendWithOutId = Omit<Friend, "friendId">;
