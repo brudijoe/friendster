@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +47,15 @@ public class FriendsterController {
     @DeleteMapping(path = "/deleteFriend")
     public ResponseEntity<List<Friend>> deleteFriend(@RequestParam("friendId") Long friendId) {
         friendsterService.deleteFriend(friendId);
+        List<Friend> updatedFriends = friendsterService.getFriends();
+        updatedFriends.sort(Comparator.comparing(Friend::getFriendId));
+        return ResponseEntity.ok().body(updatedFriends);
+    }
+
+    @PutMapping(path = "/editFriend")
+    public ResponseEntity<List<Friend>> editFriend(@RequestParam("friendId") Long friendId,
+            @RequestBody Friend friend) {
+        friendsterService.editFriend(friendId, friend);
         List<Friend> updatedFriends = friendsterService.getFriends();
         updatedFriends.sort(Comparator.comparing(Friend::getFriendId));
         return ResponseEntity.ok().body(updatedFriends);
