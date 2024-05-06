@@ -37,9 +37,15 @@ public class FriendsterService {
     @Transactional
     public void editFriend(Long friendId, Friend currentFriend) {
 
-        friendsterRepository.findById(friendId)
-                .orElseThrow(() -> new IllegalStateException("friend with friendId: " + friendId + " does not exist"));
+        // Retrieve the existing friend from the database
+        Friend existingFriend = friendsterRepository.findById(friendId)
+                .orElseThrow(() -> new IllegalStateException("Friend with friendId: " + friendId + " does not exist"));
 
-        friendsterRepository.save(currentFriend);
+        // Update the existing friend object with the new data
+        existingFriend.getBasics().setFirstName(currentFriend.getBasics().getFirstName());
+        existingFriend.getBasics().setLastName(currentFriend.getBasics().getLastName());
+
+        // Save the updated friend back to the database
+        friendsterRepository.save(existingFriend);
     }
 }
